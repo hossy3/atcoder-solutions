@@ -21,7 +21,7 @@ fn test(n: usize, k: usize, a: &[i32], s: &[i32]) -> bool {
         }
     }
     true
-} 
+}
 
 fn main() {
     input! {
