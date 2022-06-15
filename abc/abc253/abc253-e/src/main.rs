@@ -4,9 +4,9 @@ use proconio::input;
 
 fn main() {
     input! {
-        n: i64,
-        m: i64,
-        k: i64,
+        n: usize,
+        m: usize,
+        k: usize,
     }
 
     if k == 0 {
@@ -19,27 +19,25 @@ fn main() {
         return;
     }
 
-    let mut dp = vec![vec![0i64; (m + 1) as usize]; (n + 1) as usize];
+    let mut dp = vec![vec![0i64; m + 1]; n + 1];
     for i in 1..=m {
-        dp[1][i as usize] = 1;
+        dp[1][i] = 1;
     }
 
     for i in 1..n {
-        let sum = dp[i as usize].iter().fold(0, |sum, x| sum + x);
-        let mut sum2 = dp[i as usize][0..(k as usize)]
-            .iter()
-            .fold(0, |sum, x| sum + x);
+        let sum: i64 = dp[i].iter().sum();
+        let mut sum2: i64 = dp[i][0..k].iter().sum();
         for j in 1..=m {
-            if (j - k) >= 0 {
-                sum2 -= dp[i as usize][(j - k) as usize];
+            if j >= k {
+                sum2 -= dp[i][j - k];
             }
-            if (j + k - 1) <= m {
-                sum2 += dp[i as usize][(j + k - 1) as usize];
+            if j + k - 1 <= m {
+                sum2 += dp[i][j + k - 1];
             }
-            dp[(i + 1) as usize][j as usize] = (sum - sum2) % 998_244_353;
+            dp[i + 1][j] = (sum - sum2) % 998_244_353;
         }
     }
 
-    let sum = dp[n as usize].iter().fold(0, |sum, x| sum + x) % 998_244_353;
+    let sum = dp[n].iter().sum::<i64>() % 998_244_353;
     println!("{}", sum);
 }
