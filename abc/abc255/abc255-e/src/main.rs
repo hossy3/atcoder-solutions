@@ -1,45 +1,35 @@
 // -*- coding:utf-8-unix -*-
 
 use proconio::input;
-use std::collections::HashSet;
-
-fn min_cost_in_loop(i: usize, xs: &[usize], cs: &[usize]) -> usize {
-    let mut c: usize = cs[i];
-    let mut j = xs[i] - 1;
-    while j != i {
-        c = c.min(cs[j]);
-        j = xs[j] - 1;
-    }
-    c
-}
+use std::collections::HashMap;
 
 fn main() {
     input! {
         n: usize,
-        xs: [usize; n],
-        cs: [usize; n],
+        m: usize,
+        ss: [i64; n - 1],
+        xs: [i64; m],
     }
 
-    let mut bs = vec![false; n]; // 0 origin
-    let mut c = 0usize;
+    let mut bs = vec![0; n];
+    for i in 1..n {
+        bs[i] = ss[i - 1] - bs[i - 1];
+    }
+
+    let mut map = HashMap::new();
     for i in 0..n {
-        if bs[i] {
-            continue;
-        }
-
-        let mut set = HashSet::<usize>::new();
-        bs[i] = true;
-        set.insert(i);
-        let mut i = xs[i] - 1;
-        while !bs[i] {
-            bs[i] = true;
-            set.insert(i);
-            i = xs[i] - 1;
-        }
-        if set.contains(&i) {
-            c += min_cost_in_loop(i, &xs, &cs);
+        for j in 0..m {
+            let k: i64 = if i % 2 == 0 { 1 } else { -1 };
+            let c = k * (xs[j] - bs[i]);
+            if let Some(&v) = map.get(&c) {
+                map.insert(c, v + 1);
+            } else {
+                map.insert(c, 1);
+            }
         }
     }
 
-    println!("{}", c);
+    if let Some(&score) = map.values().max() {
+        println!("{}", score);
+    }
 }
