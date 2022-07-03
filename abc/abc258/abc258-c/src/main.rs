@@ -13,8 +13,7 @@ fn main() {
     for query in queries {
         if query.0 == 1 {
             index = (index + n - query.1) % n;
-        }
-        else {
+        } else {
             println!("{}", s[(index + query.1 - 1) % n]);
         }
     }
