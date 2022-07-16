@@ -10,11 +10,11 @@ fn main() {
         queries: [(usize, usize); q],
     }
     let mut index = 0usize;
-    for query in queries {
-        if query.0 == 1 {
-            index = (index + n - query.1) % n;
+    for (t, x) in queries {
+        if t == 1 {
+            index = (index + n - x) % n;
         } else {
-            println!("{}", s[(index + query.1 - 1) % n]);
+            println!("{}", s[(index + x - 1) % n]);
         }
     }
 }
