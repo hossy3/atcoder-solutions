@@ -16,5 +16,10 @@ Cargo.lock
 */**/Cargo.toml
 */**/LICENSE
 
+# These are created by cargo compete
+/compete/**/*.toml
+/compete/**/*.yml
+/compete/target/
+
 
 */**/.vscode/launch.json
