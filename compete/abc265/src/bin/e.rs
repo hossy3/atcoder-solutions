@@ -2,6 +2,26 @@ use std::collections::{HashMap, HashSet};
 
 use proconio::input;
 
+const MOD: usize = 998244353;
+
+fn update(
+    xy: &(i64, i64),
+    n: usize,
+    ab: &(i64, i64),
+    s: &HashSet<(i64, i64)>,
+    vnext: &mut HashMap<(i64, i64), usize>,
+) {
+    let x0 = xy.0 + ab.0;
+    let y0 = xy.1 + ab.1;
+    if !s.contains(&(x0, y0)) {
+        if let Some(x) = vnext.get_mut(&(x0, y0)) {
+            *x = (*x + n) % MOD;
+        } else {
+            vnext.insert((x0, y0), n);
+        }
+    }
+}
+
 fn main() {
     input! {
         n: usize,
@@ -15,7 +35,6 @@ fn main() {
         xy: [(i64, i64); m],
     }
 
-    const MOD: usize = 998244353;
     if xy.len() == 0 {
         let mut score = 1;
         for _ in 0..n {
@@ -33,36 +52,10 @@ fn main() {
     v.insert((0, 0), 1);
     for _ in 0..n {
         let mut vnext = HashMap::<(i64, i64), usize>::new();
-        for (&(x1, y1), &n) in &v {
-            let x0 = x1 + a;
-            let y0 = y1 + b;
-            if !s.contains(&(x0, y0)) {
-                if let Some(x) = vnext.get_mut(&(x0, y0)) {
-                    *x = (*x + n) % MOD;
-                } else {
-                    vnext.insert((x0, y0), n);
-                }
-            }
-
-            let x0 = x1 + c;
-            let y0 = y1 + d;
-            if !s.contains(&(x0, y0)) {
-                if let Some(x) = vnext.get_mut(&(x0, y0)) {
-                    *x = (*x + n) % MOD;
-                } else {
-                    vnext.insert((x0, y0), n);
-                }
-            }
-
-            let x0 = x1 + e;
-            let y0 = y1 + f;
-            if !s.contains(&(x0, y0)) {
-                if let Some(x) = vnext.get_mut(&(x0, y0)) {
-                    *x = (*x + n) % MOD;
-                } else {
-                    vnext.insert((x0, y0), n);
-                }
-            }
+        for (xy, &n) in &v {
+            update(xy, n, &(a, b), &s, &mut vnext);
+            update(xy, n, &(c, d), &s, &mut vnext);
+            update(xy, n, &(e, f), &s, &mut vnext);
         }
         v = vnext;
     }

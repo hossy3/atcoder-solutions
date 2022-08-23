@@ -2,6 +2,21 @@ use std::collections::HashMap;
 
 use proconio::input;
 
+fn f(cum: &[i64], p: i64) -> HashMap<usize, usize> {
+    let n = cum.len() - 1;
+    let mut m = HashMap::new();
+    let mut r = 1;
+    for l in 0..n {
+        while r < n && cum[r] - cum[l] < p {
+            r += 1;
+        }
+        if cum[r] - cum[l] == p {
+            m.insert(l, r);
+        }
+    }
+    m
+}
+
 fn main() {
     input! {
         n: usize,
@@ -15,38 +30,9 @@ fn main() {
         cum[i + 1] = cum[i] + a[i];
     }
 
-    let mut mp = HashMap::new();
-    let mut r0 = 0;
-    for l in 0..n {
-        while r0 < n && cum[r0] - cum[l] < p {
-            r0 += 1;
-        }
-        if cum[r0] - cum[l] == p {
-            mp.insert(l, r0);
-        }
-    }
-
-    let mut mq = HashMap::new();
-    let mut r0 = 0;
-    for l in 0..n {
-        while r0 < n && cum[r0] - cum[l] < q {
-            r0 += 1;
-        }
-        if cum[r0] - cum[l] == q {
-            mq.insert(l, r0);
-        }
-    }
-
-    let mut mr = HashMap::new();
-    let mut r0 = 0;
-    for l in 0..n {
-        while r0 < n && cum[r0] - cum[l] < r {
-            r0 += 1;
-        }
-        if cum[r0] - cum[l] == r {
-            mr.insert(l, r0);
-        }
-    }
+    let mp = f(&cum, p);
+    let mq = f(&cum, q);
+    let mr = f(&cum, r);
 
     for (_, pr) in mp {
         if let Some(&qr) = mq.get(&pr) {
