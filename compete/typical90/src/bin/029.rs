@@ -18,7 +18,10 @@ fn main() {
         let (_, &r0) = m.range((Included(1), Included(r + 1))).last().unwrap();
 
         // Rust 1.53-: m.retain(|&k, _| k < l || k > r);
-        let v = m.range((Included(l), Included(r))).map(|(&x, &y)| (x, y)).collect_vec();
+        let v = m
+            .range((Included(l), Included(r)))
+            .map(|(&x, &y)| (x, y))
+            .collect_vec();
         let mut h_max = l0;
         for &(k, h) in &v {
             m.remove(&k);
