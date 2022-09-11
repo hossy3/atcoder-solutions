@@ -5,12 +5,12 @@ fn main() {
         w: usize,
         lr: [(Usize1, Usize1)],
     }
-    let mut v = vec![0usize; w * 2];
+    let mut v = vec![0usize; w];
     for &(l, r) in &lr {
-        let h_new = v[l..=r].iter().max().unwrap() + 1;
+        let height = v[l..=r].iter().max().unwrap() + 1;
         for h in v[l..=r].iter_mut() {
-            *h = h_new;
+            *h = height;
         }
-        println!("{}", h_new);
+        println!("{}", height);
     }
 }

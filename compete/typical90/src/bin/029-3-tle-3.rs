@@ -34,7 +34,7 @@ fn main() {
         let r0 = prev_lower_bound(&vi, r + 1);
         let r1 = vi[r0];
 
-        let h_new = max_height(&vh, &vi, l0, r0) + 1;
+        let height = max_height(&vh, &vi, l0, r0) + 1;
         vi[l0] = l;
         if r1 == r + 1 {
             vi[l] = r1;
@@ -43,7 +43,7 @@ fn main() {
             vi[r + 1] = r1;
             vh[r + 1] = vh[r0];
         }
-        vh[l] = h_new;
-        println!("{}", h_new);
+        vh[l] = height;
+        println!("{}", height);
     }
 }

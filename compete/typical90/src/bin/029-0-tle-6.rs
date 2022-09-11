@@ -17,16 +17,16 @@ fn main() {
         let (_, &hl) = m.range((Included(0), Included(l))).last().unwrap();
         let (_, &hr) = m.range((Included(0), Included(r + 1))).last().unwrap();
 
-        let mut h_new = hl + 1;
+        let mut height = hl + 1;
         for (_, &h) in m.range((Excluded(l), Included(r))) {
-            h_new = h_new.max(h + 1);
+            height = height.max(h + 1);
         }
         for (_, h) in m.range_mut((Excluded(l), Included(r))) {
-            *h = h_new;
+            *h = height;
         }
-        m.insert(l, h_new);
+        m.insert(l, height);
         m.insert(r + 1, hr);
 
-        println!("{}", h_new);
+        println!("{}", height);
     }
 }

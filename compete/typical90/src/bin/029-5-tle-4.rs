@@ -31,10 +31,10 @@ fn main() {
     for &(l, r) in &lr {
         let l0 = cv[l];
         let r0 = cv[r + 1];
-        let h_max = v[l0..r0].iter().fold(0, |acc, &x| acc.max(x)) + 1;
+        let height = v[l0..r0].iter().fold(0, |acc, &x| acc.max(x)) + 1;
         for x in v[l0..r0].iter_mut() {
-            *x = h_max;
+            *x = height;
         }
-        println!("{}", h_max);
+        println!("{}", height);
     }
 }
