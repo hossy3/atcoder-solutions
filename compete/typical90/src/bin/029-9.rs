@@ -67,8 +67,8 @@ fn main() {
         lr: [(usize, usize)],
     }
 
-    let mut v = vec![0usize; w + 3]; // vec<height>
-    let mut t = FenwickTree::new(w + 3);
+    let mut v = vec![0usize; w + 2]; // vec<height>
+    let mut t = FenwickTree::new(w + 2);
     t.insert(1);
     t.insert(w + 1);
 
