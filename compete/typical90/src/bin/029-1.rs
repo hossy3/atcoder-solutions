@@ -1,7 +1,6 @@
 use std::collections::BTreeMap;
-use std::ops::Bound::{Excluded, Included, Unbounded};
+use std::ops::Bound::{Excluded, Unbounded};
 
-use itertools::Itertools;
 use proconio::input;
 use proconio::marker::Usize1;
 
@@ -20,17 +19,12 @@ fn main() {
         let (_, &hr) = m.range((Unbounded, Excluded(r + 2))).last().unwrap();
 
         let mut height = hl + 1;
-        if l < r {
-            // Rust 1.53-: m.retain(|&k, _| k < l || k > r);
-            let v = m
-                .range((Included(l + 1), Excluded(r + 1)))
-                .map(|(&k, _)| k)
-                .collect_vec();
-            for k in &v {
-                if let Some(h) = m.remove(k) {
-                    height = height.max(h + 1);
-                }
+        while let Some((&i, &h)) = m.range((Unbounded, Excluded(r + 1))).last() {
+            if i <= l {
+                break;
             }
+            height = height.max(h + 1);
+            m.remove(&i);
         }
 
         m.insert(l, height);
