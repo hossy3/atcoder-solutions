@@ -1,13 +1,12 @@
-use proconio::input;
+use proconio::{input, marker::Usize1};
 
-struct FenwickTree {
-    data: Vec<i64>,
-}
+struct FenwickTree(Vec<i64>);
+struct FenwickTreeSet(FenwickTree);
 
 impl FenwickTree {
     pub fn add(&mut self, mut i: usize, x: i64) {
-        while i < self.data.len() {
-            self.data[i] += x;
+        while i < self.0.len() {
+            self.0[i] += x;
             i += i & i.wrapping_neg(); // i & -i
         }
     }
@@ -15,48 +14,58 @@ impl FenwickTree {
     pub fn sum(&self, mut i: usize) -> i64 {
         let mut sum = 0;
         while i > 0 {
-            sum += self.data[i];
+            sum += self.0[i];
             i -= i & i.wrapping_neg(); // i & -i
         }
         sum
     }
 
     pub fn new(n: usize) -> Self {
-        let data = vec![0; n];
-        FenwickTree { data }
+        FenwickTree(vec![0; n])
+    }
+}
+
+impl FenwickTreeSet {
+    pub fn new(n: usize) -> Self {
+        FenwickTreeSet(FenwickTree::new(n + 1))
     }
 
-    pub fn lower_bound(&self, mut x: i64) -> usize {
+    fn lower_bound_impl(&self, mut x: i64) -> usize {
         if x == 0 {
             return 0;
         }
+        let data = &(self.0).0;
         let mut l = 0;
-        let ceil_pow2 = 32 - ((self.data.len() as u32) - 1).leading_zeros();
+        let ceil_pow2 = 32 - ((data.len() as u32) - 1).leading_zeros();
         let mut len = 1 << ceil_pow2;
         while len > 0 {
             let i = l + len;
-            if i < self.data.len() && self.data[i] < x {
-                x -= self.data[i];
+            if i < data.len() && data[i] < x {
+                x -= data[i];
                 l += len;
             }
             len = len >> 1;
         }
-        l + 1
+        l
+    }
+
+    pub fn lower_bound(&mut self, i: usize) -> usize {
+        self.lower_bound_impl(self.0.sum(i + 1))
     }
 
     pub fn contains(&mut self, i: usize) -> bool {
-        self.sum(i) - self.sum(i - 1) > 0
+        self.0.sum(i + 1) - self.0.sum(i) > 0
     }
 
     pub fn insert(&mut self, i: usize) {
         if !self.contains(i) {
-            self.add(i, 1);
+            self.0.add(i + 1, 1);
         }
     }
 
     pub fn remove(&mut self, i: usize) {
         if self.contains(i) {
-            self.add(i, -1);
+            self.0.add(i + 1, -1);
         }
     }
 }
@@ -64,32 +73,32 @@ impl FenwickTree {
 fn main() {
     input! {
         w: usize,
-        lr: [(usize, usize)],
+        lr: [(Usize1, Usize1)],
     }
 
-    let mut v = vec![0usize; w + 2]; // vec<height>
-    let mut t = FenwickTree::new(w + 2);
-    t.insert(1);
-    t.insert(w + 1);
+    let mut v = vec![0usize; w + 1];
+    let mut s = FenwickTreeSet::new(w + 1);
+    s.insert(0);
+    s.insert(w);
 
     for &(l, r) in &lr {
-        let hl = v[t.lower_bound(t.sum(l))];
-        let hr = v[t.lower_bound(t.sum(r + 1))];
+        let hl = v[s.lower_bound(l)];
+        let hr = v[s.lower_bound(r + 1)];
 
         let mut height = hl + 1;
         loop {
-            let i = t.lower_bound(t.sum(r));
+            let i = s.lower_bound(r);
             if i <= l {
                 break;
             }
             height = height.max(v[i] + 1);
-            t.remove(i);
+            s.remove(i);
         }
 
         v[l] = height;
-        t.insert(l);
+        s.insert(l);
         v[r + 1] = hr;
-        t.insert(r + 1);
+        s.insert(r + 1);
 
         println!("{}", height);
     }
