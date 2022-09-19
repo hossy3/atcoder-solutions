@@ -20,21 +20,11 @@ impl FenwickTree {
         sum
     }
 
-    pub fn new(n: usize) -> Self {
-        FenwickTree(vec![0; n])
-    }
-}
-
-impl FenwickTreeSet {
-    pub fn new(n: usize) -> Self {
-        FenwickTreeSet(FenwickTree::new(n + 1))
-    }
-
-    fn lower_bound_impl(&self, mut x: i64) -> usize {
+    fn lower_bound(&self, mut x: i64) -> usize {
         if x == 0 {
             return 0;
         }
-        let data = &(self.0).0;
+        let data = &self.0;
         let mut l = 0;
         let ceil_pow2 = 32 - ((data.len() as u32) - 1).leading_zeros();
         let mut len = 1 << ceil_pow2;
@@ -49,8 +39,18 @@ impl FenwickTreeSet {
         l
     }
 
+    pub fn new(n: usize) -> Self {
+        FenwickTree(vec![0; n])
+    }
+}
+
+impl FenwickTreeSet {
+    pub fn new(n: usize) -> Self {
+        FenwickTreeSet(FenwickTree::new(n + 1))
+    }
+
     pub fn lower_bound(&mut self, i: usize) -> usize {
-        self.lower_bound_impl(self.0.sum(i + 1))
+        self.0.lower_bound(self.0.sum(i + 1))
     }
 
     pub fn contains(&mut self, i: usize) -> bool {
