@@ -20,7 +20,7 @@ impl FenwickTree {
         sum
     }
 
-    fn lower_bound(&self, mut x: i64) -> usize {
+    fn lower_bound(&self, x: i64) -> usize {
         if x == 0 {
             return 0;
         }
@@ -30,8 +30,7 @@ impl FenwickTree {
         let mut len = 1 << ceil_pow2;
         while len > 0 {
             let i = l + len;
-            if i < data.len() && data[i] < x {
-                x -= data[i];
+            if i < data.len() && self.sum(i) < x {
                 l = i;
             }
             len = len >> 1;
