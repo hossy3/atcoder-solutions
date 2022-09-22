@@ -13,8 +13,9 @@ impl LazySegTree {
         if lazy == 0 {
             return;
         }
-        self.data[k] = self.data[k].max(lazy);
-        if k < self.size {
+        self.data[k * 2] = self.data[k * 2].max(lazy);
+        self.data[k * 2 + 1] = self.data[k * 2 + 1].max(lazy);
+        if k * 2 < self.size {
             self.lazy[k * 2] = self.lazy[k * 2].max(lazy);
             self.lazy[k * 2 + 1] = self.lazy[k * 2 + 1].max(lazy);
         }
@@ -22,15 +23,17 @@ impl LazySegTree {
     }
 
     fn update_impl(&mut self, lr: (usize, usize), x: usize, k: usize, lr0: (usize, usize)) {
-        self.push(k);
         let (l, r) = lr;
         let (l0, r0) = lr0;
         if r0 <= l || r <= l0 {
             // noop
         } else if l <= l0 && r0 <= r {
-            self.lazy[k] = x;
-            self.push(k);
+            self.data[k] = self.data[k].max(x);
+            if k < self.size {
+                self.lazy[k] = self.lazy[k].max(x);
+            }
         } else {
+            self.push(k);
             self.update_impl(lr, x, k * 2, (l0, (l0 + r0) / 2));
             self.update_impl(lr, x, k * 2 + 1, ((l0 + r0) / 2, r0));
             self.data[k] = self.data[k * 2].max(self.data[k * 2 + 1]);
@@ -38,7 +41,6 @@ impl LazySegTree {
     }
 
     fn prod_impl(&mut self, lr: (usize, usize), k: usize, lr0: (usize, usize)) -> usize {
-        self.push(k);
         let (l, r) = lr;
         let (l0, r0) = lr0;
         if r0 <= l || r <= l0 {
@@ -46,6 +48,7 @@ impl LazySegTree {
         } else if l <= l0 && r0 <= r {
             self.data[k]
         } else {
+            self.push(k);
             let l_val = self.prod_impl(lr, k * 2, (l0, (l0 + r0) / 2));
             let r_val = self.prod_impl(lr, k * 2 + 1, ((l0 + r0) / 2, r0));
             l_val.max(r_val)
@@ -56,7 +59,7 @@ impl LazySegTree {
         let ceil_pow2 = 32 - ((n as u32) - 1).leading_zeros();
         let size = 1 << ceil_pow2;
         let data = vec![0; size * 2];
-        let lazy = vec![0; size * 2];
+        let lazy = vec![0; size];
         LazySegTree { size, data, lazy }
     }
 
