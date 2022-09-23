@@ -894,20 +894,19 @@ use segtree::*;
 
 use proconio::{input, marker::Usize1};
 
-struct MaxMax;
-impl MapMonoid for MaxMax {
-    type M = Max<usize>;
+type M = Max<usize>;
+struct F;
+impl MapMonoid for F {
+    type M = M;
     type F = usize;
 
     fn identity_map() -> Self::F {
         0
     }
-
-    fn mapping(&f: &usize, &x: &usize) -> usize {
+    fn mapping(&f: &Self::F, &x: &<M as Monoid>::S) -> <M as Monoid>::S {
         f.max(x) 
     }
-
-    fn composition(&f: &usize, &g: &usize) -> usize {
+    fn composition(&f: &Self::F, &g: &Self::F) -> Self::F {
         f.max(g)
     }
 }
@@ -918,7 +917,7 @@ fn main() {
         lr: [(Usize1, Usize1)],
     }
 
-    let mut segtree = LazySegtree::<MaxMax>::new(w);
+    let mut segtree = LazySegtree::<F>::new(w);
     for &(l, r) in &lr {
         let height = segtree.prod(l, r + 1) + 1;
         segtree.apply_range(l, r + 1, height);
