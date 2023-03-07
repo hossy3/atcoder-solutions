@@ -2,6 +2,8 @@ use std::collections::HashSet;
 
 use proconio::input;
 
+// score: 4547731
+
 fn main() {
     input! {
         n: usize,
