@@ -11,15 +11,15 @@ fn main() {
     }
 
     let max = *a.iter().max().unwrap();
-    let mut grandy = vec![0; max + 1];
+    let mut grundy = vec![0; max + 1];
     for i in x..y {
-        grandy[i] = 1 - grandy[i - x];
+        grundy[i] = 1 - grundy[i - x];
     }
     for i in y..=max {
         let mut v = [false; 3];
-        v[grandy[i - y]] = true;
-        v[grandy[i - x]] = true;
-        grandy[i] = if !v[0] {
+        v[grundy[i - y]] = true;
+        v[grundy[i - x]] = true;
+        grundy[i] = if !v[0] {
             0
         } else if !v[1] {
             1
@@ -28,7 +28,7 @@ fn main() {
         }
     }
 
-    let result = a.iter().fold(0, |acc, a| acc ^ grandy[*a]);
+    let result = a.iter().fold(0, |acc, a| acc ^ grundy[*a]);
     let first = result != 0;
     println!("{}", if first { "First" } else { "Second" });
 }

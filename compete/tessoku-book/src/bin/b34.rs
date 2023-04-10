@@ -9,8 +9,8 @@ fn main() {
         _: usize,
         a: [usize; n],
     }
-    let grandy = [0, 0, 1, 1, 2];
-    let result = a.iter().fold(0, |acc, a| acc ^ grandy[*a % 5]);
+    let grundy = [0, 0, 1, 1, 2];
+    let result = a.iter().fold(0, |acc, a| acc ^ grundy[*a % 5]);
     let first = result != 0;
     println!("{}", if first { "First" } else { "Second" });
 }
