@@ -17,9 +17,9 @@ Cargo.lock
 */**/LICENSE
 
 # These are created by cargo compete
-/compete/**/*.toml
-/compete/**/*.yml
-/compete/target/
+/atcoder*/**/*.toml
+/atcoder*/**/*.yml
+/atcoder*/target/
 
 
 */**/.vscode/launch.json
