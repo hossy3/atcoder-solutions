@@ -63,10 +63,10 @@ counter = "=0.5.7"
 hashbag = "=0.1.11"
 pathfinding = "=4.3.0"
 recur-fn = "=2.2.0"
-indexing = "=0.4.1"
-amplify = "=3.14.2"
+indexing = { version = "=0.4.1", features = ["experimental_pointer_ranges"] }
+amplify = { version = "=3.14.2", features = ["c_raw", "rand", "stringly_conversions"] }
 amplify_derive = "=2.11.3"
-amplify_num = "=0.4.1"
+amplify_num = { version = "=0.4.1", features = ["std"] }
 easy-ext = "=1.0.1"
 multimap = "=0.9.0"
 btreemultimap = "=0.1.1"
@@ -88,7 +88,7 @@ ndarray = "=0.15.6"
 nalgebra = "=0.32.3"
 alga = "=0.9.3"
 libm = "=0.2.7"
-rand = { version = "=0.8.5", features = ["small_rng"] }
+rand = { version = "=0.8.5", features = ["small_rng", "min_const_gen"] }
 getrandom = "=0.2.10"
 rand_chacha = "=0.3.1"
 rand_core = "=0.6.4"
@@ -113,7 +113,7 @@ bitset-fixed = "=0.1.0"
 proconio = { version = "=0.4.5", features = ["derive"] }
 text_io = "=0.1.12"
 rustc-hash = "=1.1.0"
-smallvec = "=1.11.0"
+smallvec = { version = "=1.11.0", features = ["const_generics", "const_new", "write", "union", "serde", "arbitrary"] }
 '''
 dev-dependencies = '''
 #atcoder-202004-lock = { git = "https://github.com/qryxip/atcoder-202004-lock" }
