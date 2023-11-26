@@ -1,0 +1,73 @@
+use std::collections::BTreeMap;
+
+use proconio::input;
+
+struct FenwickTree(Vec<usize>);
+
+impl FenwickTree {
+    pub fn add(&mut self, mut i: usize, x: usize) {
+        debug_assert_ne!(i, 0);
+        while i < self.0.len() {
+            self.0[i] += x;
+            i += i & i.wrapping_neg(); // i & -i
+        }
+    }
+
+    pub fn sum(&self, mut i: usize) -> usize {
+        let mut sum = 0;
+        while i > 0 {
+            sum += self.0[i];
+            i -= i & i.wrapping_neg(); // i & -i
+        }
+        sum
+    }
+
+    pub fn new(n: usize) -> Self {
+        FenwickTree(vec![0; n])
+    }
+}
+
+fn f(a: &[Vec<usize>]) -> usize {
+    let n = a.len();
+    let m = a[0].len();
+    let mut tree = FenwickTree::new(n * m + 1);
+    let mut map = BTreeMap::new();
+    for a in a {
+        for &x in a {
+            map.insert(x, 0);
+        }
+    }
+    for (i, (_, v)) in map.iter_mut().enumerate() {
+        *v = i + 1;
+    }
+
+    let mut result = 0usize;
+    for (i, a) in a.iter().enumerate().rev() {
+        for &x in a {
+            let &j = map.get(&x).unwrap();
+            result += tree.sum(j);
+        }
+
+        let mut tree0 = FenwickTree::new(n * m + 1);
+        for &x in a {
+            let &j = map.get(&x).unwrap();
+            tree.add(j, 1);
+            tree0.add(j, 1);
+        }
+        for &x in a {
+            let &j = map.get(&x).unwrap();
+            result += tree0.sum(j) * (n - i - 1);
+        }
+    }
+    result
+}
+
+fn main() {
+    input! {
+        n: usize,
+        m: usize,
+        a: [[usize; m]; n],
+    }
+    let result = f(&a);
+    println!("{}", result);
+}
