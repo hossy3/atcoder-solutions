@@ -37,6 +37,7 @@ snippet/
 !/atcoder*/abc330/src/bin/c*.rs
 !/atcoder*/abc330/src/bin/d*.rs
 !/atcoder*/abc330/src/bin/e*.rs
+!/atcoder*/abc330/src/bin/f*.rs
 
 !/atcoder*/abc329/src/bin/a*.rs
 !/atcoder*/abc329/src/bin/b*.rs
@@ -69,6 +70,7 @@ snippet/
 !/atcoder*/abc325/src/bin/b*.rs
 !/atcoder*/abc325/src/bin/c*.rs
 !/atcoder*/abc325/src/bin/d*.rs
+!/atcoder*/abc325/src/bin/e*.rs
 
 !/atcoder*/abc324/src/bin/a*.rs
 !/atcoder*/abc324/src/bin/b*.rs
