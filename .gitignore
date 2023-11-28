@@ -88,6 +88,7 @@ snippet/
 !/atcoder*/abc322/src/bin/b*.rs
 !/atcoder*/abc322/src/bin/c*.rs
 !/atcoder*/abc322/src/bin/d*.rs
+!/atcoder*/abc322/src/bin/e*.rs
 
 !/atcoder*/abc321/src/bin/a*.rs
 !/atcoder*/abc321/src/bin/b*.rs
@@ -883,6 +884,9 @@ snippet/
 !/atcoder*/abc192/src/bin/b*.rs
 !/atcoder*/abc192/src/bin/c*.rs
 
-#!/atcoder*/abc191/src/bin/a*.rs
+!/atcoder*/abc191/src/bin/a*.rs
+!/atcoder*/abc191/src/bin/b*.rs
+!/atcoder*/abc191/src/bin/c*.rs
+!/atcoder*/abc191/src/bin/d*.rs
 
 ## others
