@@ -889,4 +889,9 @@ snippet/
 !/atcoder*/abc191/src/bin/c*.rs
 !/atcoder*/abc191/src/bin/d*.rs
 
+!/atcoder*/abc190/src/bin/a*.rs
+!/atcoder*/abc190/src/bin/b*.rs
+!/atcoder*/abc190/src/bin/c*.rs
+!/atcoder*/abc190/src/bin/d*.rs
+
 ## others
