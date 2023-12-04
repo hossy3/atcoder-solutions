@@ -32,6 +32,13 @@ snippet/
 
 ## ABC 300..350
 
+!/atcoder*/abc331/src/bin/a*.rs
+!/atcoder*/abc331/src/bin/b*.rs
+!/atcoder*/abc331/src/bin/c*.rs
+!/atcoder*/abc331/src/bin/d*.rs
+!/atcoder*/abc331/src/bin/e*.rs
+!/atcoder*/abc331/src/bin/f*.rs
+
 !/atcoder*/abc330/src/bin/a*.rs
 !/atcoder*/abc330/src/bin/b*.rs
 !/atcoder*/abc330/src/bin/c*.rs
@@ -83,6 +90,7 @@ snippet/
 !/atcoder*/abc323/src/bin/c*.rs
 !/atcoder*/abc323/src/bin/d*.rs
 !/atcoder*/abc323/src/bin/e*.rs
+!/atcoder*/abc323/src/bin/f*.rs
 
 !/atcoder*/abc322/src/bin/a*.rs
 !/atcoder*/abc322/src/bin/b*.rs
@@ -863,6 +871,8 @@ snippet/
 !/atcoder*/abc197/src/bin/a*.rs
 !/atcoder*/abc197/src/bin/b*.rs
 !/atcoder*/abc197/src/bin/c*.rs
+!/atcoder*/abc197/src/bin/d*.rs
+!/atcoder*/abc197/src/bin/e*.rs
 
 !/atcoder*/abc196/src/bin/a*.rs
 !/atcoder*/abc196/src/bin/b*.rs
@@ -893,5 +903,11 @@ snippet/
 !/atcoder*/abc190/src/bin/b*.rs
 !/atcoder*/abc190/src/bin/c*.rs
 !/atcoder*/abc190/src/bin/d*.rs
+
+!/atcoder*/abc189/src/bin/a*.rs
+!/atcoder*/abc189/src/bin/b*.rs
+!/atcoder*/abc189/src/bin/c*.rs
+!/atcoder*/abc189/src/bin/d*.rs
+!/atcoder*/abc189/src/bin/e*.rs
 
 ## others
