@@ -32,6 +32,25 @@ snippet/
 
 ## ABC 300..350
 
+!/atcoder*/abc334/src/bin/a*.rs
+!/atcoder*/abc334/src/bin/b*.rs
+!/atcoder*/abc334/src/bin/c*.rs
+!/atcoder*/abc334/src/bin/d*.rs
+!/atcoder*/abc334/src/bin/e*.rs
+
+!/atcoder*/abc333/src/bin/a*.rs
+!/atcoder*/abc333/src/bin/b*.rs
+!/atcoder*/abc333/src/bin/c*.rs
+!/atcoder*/abc333/src/bin/d*.rs
+!/atcoder*/abc333/src/bin/e*.rs
+!/atcoder*/abc333/src/bin/f*.rs
+
+!/atcoder*/abc332/src/bin/a*.rs
+!/atcoder*/abc332/src/bin/b*.rs
+!/atcoder*/abc332/src/bin/c*.rs
+!/atcoder*/abc332/src/bin/d*.rs
+!/atcoder*/abc332/src/bin/f*.rs
+
 !/atcoder*/abc331/src/bin/a*.rs
 !/atcoder*/abc331/src/bin/b*.rs
 !/atcoder*/abc331/src/bin/c*.rs
@@ -342,6 +361,7 @@ snippet/
 !/atcoder*/abc286/src/bin/d*.rs
 !/atcoder*/abc286/src/bin/e.rs
 !/atcoder*/abc286/src/bin/e-*.rs
+!/atcoder*/abc286/src/bin/f*.rs
 !/atcoder*/abc286/src/bin/g*.rs
 
 !/atcoder*/abc285/src/bin/a*.rs
@@ -858,7 +878,7 @@ snippet/
 !/atcoder*/abc200/src/bin/c*.rs
 !/atcoder*/abc200/src/bin/d*.rs
 
-## ABC ..200
+## ABC 150..200
 
 !/atcoder*/abc199/src/bin/a*.rs
 !/atcoder*/abc199/src/bin/b*.rs
@@ -909,5 +929,111 @@ snippet/
 !/atcoder*/abc189/src/bin/c*.rs
 !/atcoder*/abc189/src/bin/d*.rs
 !/atcoder*/abc189/src/bin/e*.rs
+
+!/atcoder*/abc188/src/bin/a*.rs
+!/atcoder*/abc188/src/bin/b*.rs
+!/atcoder*/abc188/src/bin/c*.rs
+!/atcoder*/abc188/src/bin/d*.rs
+
+!/atcoder*/abc187/src/bin/a*.rs
+!/atcoder*/abc187/src/bin/b*.rs
+!/atcoder*/abc187/src/bin/c*.rs
+!/atcoder*/abc187/src/bin/d*.rs
+
+!/atcoder*/abc186/src/bin/a*.rs
+!/atcoder*/abc186/src/bin/b*.rs
+!/atcoder*/abc186/src/bin/c*.rs
+!/atcoder*/abc186/src/bin/d*.rs
+
+!/atcoder*/abc185/src/bin/a*.rs
+!/atcoder*/abc185/src/bin/b*.rs
+!/atcoder*/abc185/src/bin/c*.rs
+!/atcoder*/abc185/src/bin/d*.rs
+
+!/atcoder*/abc184/src/bin/a*.rs
+!/atcoder*/abc184/src/bin/b*.rs
+!/atcoder*/abc184/src/bin/c*.rs
+
+!/atcoder*/abc183/src/bin/a*.rs
+!/atcoder*/abc183/src/bin/b*.rs
+!/atcoder*/abc183/src/bin/c*.rs
+!/atcoder*/abc183/src/bin/d*.rs
+
+!/atcoder*/abc182/src/bin/a*.rs
+!/atcoder*/abc182/src/bin/b*.rs
+!/atcoder*/abc182/src/bin/c*.rs
+!/atcoder*/abc182/src/bin/d*.rs
+
+!/atcoder*/abc181/src/bin/a*.rs
+!/atcoder*/abc181/src/bin/b*.rs
+!/atcoder*/abc181/src/bin/c*.rs
+!/atcoder*/abc181/src/bin/d*.rs
+!/atcoder*/abc181/src/bin/d*.rs
+
+!/atcoder*/abc180/src/bin/a*.rs
+!/atcoder*/abc180/src/bin/b*.rs
+!/atcoder*/abc180/src/bin/c*.rs
+!/atcoder*/abc180/src/bin/d*.rs
+
+!/atcoder*/abc179/src/bin/a*.rs
+!/atcoder*/abc179/src/bin/b*.rs
+!/atcoder*/abc179/src/bin/c*.rs
+
+!/atcoder*/abc178/src/bin/a*.rs
+!/atcoder*/abc178/src/bin/b*.rs
+!/atcoder*/abc178/src/bin/c*.rs
+!/atcoder*/abc178/src/bin/d*.rs
+
+!/atcoder*/abc177/src/bin/a*.rs
+!/atcoder*/abc177/src/bin/b*.rs
+!/atcoder*/abc177/src/bin/c*.rs
+!/atcoder*/abc177/src/bin/d*.rs
+
+!/atcoder*/abc176/src/bin/a*.rs
+!/atcoder*/abc176/src/bin/b*.rs
+!/atcoder*/abc176/src/bin/c*.rs
+!/atcoder*/abc176/src/bin/d*.rs
+
+!/atcoder*/abc175/src/bin/a*.rs
+!/atcoder*/abc175/src/bin/b*.rs
+!/atcoder*/abc175/src/bin/c*.rs
+
+!/atcoder*/abc174/src/bin/a*.rs
+!/atcoder*/abc174/src/bin/b*.rs
+!/atcoder*/abc174/src/bin/c*.rs
+!/atcoder*/abc174/src/bin/d*.rs
+
+!/atcoder*/abc173/src/bin/a*.rs
+!/atcoder*/abc173/src/bin/b*.rs
+!/atcoder*/abc173/src/bin/c*.rs
+!/atcoder*/abc173/src/bin/d*.rs
+
+!/atcoder*/abc172/src/bin/a*.rs
+!/atcoder*/abc172/src/bin/b*.rs
+!/atcoder*/abc172/src/bin/c*.rs
+!/atcoder*/abc172/src/bin/d*.rs
+
+!/atcoder*/abc171/src/bin/a*.rs
+!/atcoder*/abc171/src/bin/b*.rs
+!/atcoder*/abc171/src/bin/c*.rs
+!/atcoder*/abc171/src/bin/d*.rs
+!/atcoder*/abc171/src/bin/e*.rs
+
+!/atcoder*/abc170/src/bin/a*.rs
+!/atcoder*/abc170/src/bin/b*.rs
+!/atcoder*/abc170/src/bin/c*.rs
+
+!/atcoder*/abc169/src/bin/a*.rs
+!/atcoder*/abc169/src/bin/b*.rs
+!/atcoder*/abc169/src/bin/c*.rs
+!/atcoder*/abc169/src/bin/d*.rs
+
+## ABC 100..150
+
+## ABC 050..100
+
+!/atcoder*/abc088/src/bin/*.rs
+
+## ABC 001..050
 
 ## others
