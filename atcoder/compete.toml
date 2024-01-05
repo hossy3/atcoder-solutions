@@ -38,6 +38,8 @@ fn main() {
         dist <= time && time % 2 == dist % 2
     });
     println!("{}", if yes { "Yes" } else { "No" });
+    // let result = n;
+    // println!("{result}");
 }
 '''
 
@@ -58,7 +60,7 @@ ac-library-rs = "=0.1.1"
 # varisat = "=0.2.2"
 # memoise = "=0.3.2"
 # argio = "=0.2.0"
-bitvec = "=1.0.1"
+# bitvec = "=1.0.1"
 # counter = "=0.5.7"
 # hashbag = "=0.1.11"
 # pathfinding = "=4.3.0"
