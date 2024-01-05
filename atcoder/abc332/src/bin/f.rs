@@ -39,7 +39,6 @@ fn main() {
 
     for &(l, r, x) in &lrx {
         let p = Mint::new(1) / Mint::new(r - l + 1);
-        eprintln!("{}", p);
         segtree.apply_range(l..=r, (Mint::new(1) - p, Mint::new(x) * p));
     }
 
