@@ -12,7 +12,7 @@ fn shortest_all_ungraph(s: usize, graph: &[Vec<usize>]) -> Vec<Option<usize>> {
 
     while let Some((step, i)) = queue.pop_front() {
         for &j in &graph[i] {
-            if v[j] == None {
+            if v[j].is_none() {
                 v[j] = Some(step + 1);
                 queue.push_back((step + 1, j));
             }
