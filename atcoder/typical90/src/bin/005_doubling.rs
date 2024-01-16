@@ -16,10 +16,10 @@ fn mul(k0: usize, v0: &[Mint], v1: &[Mint]) -> Vec<Mint> {
     let b = v0.len();
     let mut v = vec![Mint::new(0); b];
 
-    for i0 in 0..b {
-        for i1 in 0..b {
+    for (i0, &x0) in v0.iter().enumerate() {
+        for (i1, &b1) in v1.iter().enumerate() {
             let i = (i0 * k0 + i1) % b;
-            v[i] += v0[i0] * v1[i1];
+            v[i] += x0 * b1;
         }
     }
 

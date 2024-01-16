@@ -17,8 +17,8 @@ fn main() {
     }
 
     let graph = build_ungraph_with_cost(n, &abc);
-    let reachable0 = dijkstra_all(&0, |&i| graph[i].iter().map(|&pair| pair));
-    let reachable1 = dijkstra_all(&(n - 1), |&i| graph[i].iter().map(|&pair| pair));
+    let reachable0 = dijkstra_all(&0, |&i| graph[i].iter().copied());
+    let reachable1 = dijkstra_all(&(n - 1), |&i| graph[i].iter().copied());
 
     let mut v = vec![(0usize, 0usize); n];
     for (i, (_, c)) in reachable0 {
