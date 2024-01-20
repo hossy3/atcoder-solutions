@@ -10,7 +10,7 @@ fn main() {
     }
     let mut map = HashMap::new();
     for (&(x, y), &c) in xy.iter().zip(s.iter()) {
-        let mut z = map.entry(y).or_insert((1_000_000_000, 0));
+        let z = map.entry(y).or_insert((1_000_000_000, 0));
         if c == 'L' {
             z.1 = z.1.max(x);
         } else {
