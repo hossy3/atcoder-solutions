@@ -1,4 +1,4 @@
-use im_rc::HashMap;
+use std::collections::HashMap;
 use petgraph::unionfind::UnionFind;
 use proconio::{input, marker::Usize1};
 

@@ -1,4 +1,4 @@
-use im_rc::HashMap;
+use std::collections::HashMap;
 use proconio::input;
 
 fn f(i: usize, j: usize, x: usize, ms: &mut [HashMap<usize, usize>], a: &Vec<Vec<usize>>) {
