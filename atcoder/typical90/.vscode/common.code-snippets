@@ -1,0 +1,18 @@
+{
+  "bit_test": {
+    "scope": "rust",
+    "prefix": "ac_bit_test",
+    "body": [
+      "trait BitTest {",
+      "    fn bit_test(&self, i: usize) -> bool;",
+      "}",
+      "",
+      "impl BitTest for usize {",
+      "    fn bit_test(&self, i: usize) -> bool {",
+      "        self & (1 << i) != 0",
+      "    }",
+      "}",
+      ""
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "build_ungraph": {
+    "scope": "rust",
+    "prefix": "ac_build_ungraph",
+    "body": [
+      "fn build_ungraph(n: usize, uv: &[(usize, usize)]) -> Vec<Vec<usize>> {",
+      "    let mut graph = vec![vec![]; n]; // node, edge",
+      "    for &(u, v) in uv {",
+      "        graph[u].push(v);",
+      "        graph[v].push(u);",
+      "    }",
+      "    graph",
+      "}",
+      ""
+    ],
+    "description": "Build undirected graph."
+  },
+  "shortest_all_ungraph": {
+    "scope": "rust",
+    "prefix": "ac_shortest_all_ungraph",
+    "description": "All shortest path length of undirected graph.",
+    "body": [
+      "fn shortest_all_ungraph(s: usize, graph: &[Vec<usize>]) -> Vec<Option<usize>> {",
+      "    let n = graph.len();",
+      "    let mut v = vec![None; n];",
+      "    let mut queue = VecDeque::new();",
+      "    v[s] = Some(0usize);",
+      "    queue.push_back((0, s));",
+      "",
+      "    while let Some((step, i)) = queue.pop_front() {",
+      "        for &j in &graph[i] {",
+      "            if v[j].is_none() {",
+      "                v[j] = Some(step + 1);",
+      "                queue.push_back((step + 1, j));",
+      "            }",
+      "        }",
+      "    }",
+      "    v",
+      "}",
+      ""
+    ]
+  },
+  "build_ungraph_with_cost": {
+    "scope": "rust",
+    "prefix": "ac_build_ungraph_with_cost",
+    "body": [
+      "fn build_ungraph_with_cost(n: usize, uvc: &[(usize, usize, usize)]) -> Vec<Vec<(usize, usize)>> {",
+      "    let mut graph = vec![vec![]; n]; // node, (edge, cost)",
+      "    for &(u, v, c) in uvc {",
+      "        graph[u].push((v, c));",
+      "        graph[v].push((u, c));",
+      "    }",
+      "    graph",
+      "}",
+      ""
+    ]
+  },
+  "shortest_all_ungraph_with_cost": {
+    "scope": "rust",
+    "prefix": "ac_shortest_all_ungraph_with_cost",
+    "description": "All shortest path costs of undirected graph.",
+    "body": [
+      "fn shortest_all_ungraph_with_cost(s: usize, graph: &[Vec<(usize, usize)>]) -> Vec<Option<usize>> {",
+      "    let n = graph.len();",
+      "    let mut v = vec![None; n];",
+      "    let mut heap = BinaryHeap::<(Reverse<usize>, usize)>::new();",
+      "    v[s] = Some(0usize);",
+      "    heap.push((Reverse(0), s));",
+      "",
+      "    while let Some((Reverse(c), i)) = heap.pop() {",
+      "        if let Some(c0) = v[i] {",
+      "            if c0 < c {",
+      "                continue;",
+      "            }",
+      "        }",
+      "        for &(i0, c0) in &graph[i] {",
+      "            let c0 = c + c0;",
+      "            if let Some(c1) = v[i0] {",
+      "                if c1 <= c0 {",
+      "                    continue;",
+      "                }",
+      "            }",
+      "            v[i0] = Some(c0);",
+      "            heap.push((Reverse(c0), i0));",
+      "        }",
+      "    }",
+      "    v",
+      "}",
+      ""
+    ]
+  }
+}
