@@ -40,21 +40,21 @@ fn main() {
         dp[0][i] += Mint::new(1);
     }
 
-    let log2 = (usize::BITS - n.leading_zeros()) as usize;
-    assert!(log2 > 0);
-    let mut pow10s = vec![0; log2]; // [(10^(2^0)) % b, (10^(2^1)) % b, (10^(2^2)) % b, ...]
+    let nbits = (n.ilog2() + 1) as usize;
+    assert!(nbits > 0);
+    let mut pow10s = vec![0; nbits]; // [(10^(2^0)) % b, (10^(2^1)) % b, (10^(2^2)) % b, ...]
     pow10s[0] = 10 % b;
-    for i in 0..(log2 - 1) {
+    for i in 0..(nbits - 1) {
         pow10s[i + 1] = (pow10s[i] * pow10s[i]) % b;
     }
 
-    for i in 0..(log2 - 1) {
+    for i in 0..(nbits - 1) {
         dp.push(mul(pow10s[i], &dp[i], &dp[i]));
     }
 
     let mut results = vec![Mint::new(0); b];
     results[0] = Mint::new(1);
-    for i in 0..log2 {
+    for i in 0..nbits {
         if n.bit_test(i) {
             results = mul(pow10s[i], &results, &dp[i]);
         }
