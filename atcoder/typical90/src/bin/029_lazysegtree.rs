@@ -1,4 +1,4 @@
-use ac_library::{LazySegtree, MapMonoid, Max};
+use ac_library::{LazySegtree, MapMonoid, Max, Monoid};
 use proconio::{input, marker::Usize1};
 
 struct MaxMax;
@@ -9,12 +9,10 @@ impl MapMonoid for MaxMax {
     fn identity_map() -> Self::F {
         0
     }
-
-    fn mapping(&f: &usize, &x: &usize) -> usize {
+    fn mapping(&f: &Self::F, &x: &<Self::M as Monoid>::S) -> <Self::M as Monoid>::S {
         f.max(x)
     }
-
-    fn composition(&f: &usize, &g: &usize) -> usize {
+    fn composition(&f: &Self::F, &g: &Self::F) -> Self::F {
         f.max(g)
     }
 }
