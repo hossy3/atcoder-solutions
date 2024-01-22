@@ -1,6 +1,6 @@
 use std::cmp::Reverse;
 
-use ac_library::{LazySegtree, MapMonoid, Max};
+use ac_library::{LazySegtree, MapMonoid, Max, Monoid};
 use proconio::input;
 
 struct MaxAdd;
@@ -11,17 +11,15 @@ impl MapMonoid for MaxAdd {
     fn identity_map() -> Self::F {
         0
     }
-
-    fn mapping(&f: &i64, &x: &i64) -> i64 {
+    fn mapping(&f: &Self::F, &x: &<Self::M as Monoid>::S) -> <Self::M as Monoid>::S {
         f + x
     }
-
-    fn composition(&f: &i64, &g: &i64) -> i64 {
+    fn composition(&f: &Self::F, &g: &Self::F) -> Self::F {
         f + g
     }
 }
 
-fn f(n: usize, lr: &Vec<(usize, usize)>) -> i64 {
+fn f(n: usize, lr: &[(usize, usize)]) -> i64 {
     let mut lr: Vec<(usize, usize)> = lr.iter().map(|&(l, r)| (l - 1, r - 1)).collect();
     lr.sort_by_key(|&(l, r)| (r, Reverse(l)));
 
@@ -57,7 +55,7 @@ mod tests {
         assert_eq!(f(3, &vec![(2, 3), (1, 3)]), 0);
 
         // 実例
-        assert_eq!(f(6, &mut vec![(2, 5), (1, 4), (1, 3)]), 2);
+        assert_eq!(f(6, &vec![(2, 5), (1, 4), (1, 3)]), 2);
     }
 }
 
@@ -65,8 +63,8 @@ fn main() {
     input! {
         n: usize,
         m: usize,
-        mut lr: [(usize, usize); m],
+        lr: [(usize, usize); m],
     }
-    let result = f(n, &mut lr);
+    let result = f(n, &lr);
     println!("{result}");
 }

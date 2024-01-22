@@ -3,7 +3,7 @@ use std::cmp::Reverse;
 use ac_library::{Additive, Segtree};
 use proconio::input;
 
-fn f(n: usize, lr: &Vec<(usize, usize)>) -> i64 {
+fn f(n: usize, lr: &[(usize, usize)]) -> i64 {
     let mut lr: Vec<(usize, usize)> = lr.iter().map(|&(l, r)| (l - 1, r - 1)).collect();
     lr.sort_by_key(|&(l, r)| (r, Reverse(l)));
 
@@ -40,7 +40,7 @@ mod tests {
         assert_eq!(f(3, &vec![(2, 3), (1, 3)]), 0);
 
         // 実例
-        assert_eq!(f(6, &mut vec![(2, 5), (1, 4), (1, 3)]), 2);
+        assert_eq!(f(6, &vec![(2, 5), (1, 4), (1, 3)]), 2);
     }
 }
 
@@ -48,8 +48,8 @@ fn main() {
     input! {
         n: usize,
         m: usize,
-        mut lr: [(usize, usize); m],
+        lr: [(usize, usize); m],
     }
-    let result = f(n, &mut lr);
+    let result = f(n, &lr);
     println!("{result}");
 }
