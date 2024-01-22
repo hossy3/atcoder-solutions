@@ -1,12 +1,6 @@
 use proconio::input;
 
-fn main() {
-    input! {
-        n: usize,
-        ws: [usize; n],
-        bs: [usize; n],
-    }
-
+fn build_grundy() -> Vec<Vec<usize>> {
     const N: usize = 50;
     let b_max = N * (N + 1) / 2 + N + 1;
     let mut grundy = vec![vec![0; b_max]; N + 1];
@@ -26,7 +20,17 @@ fn main() {
         }
     }
 
-    let xor = std::iter::zip(ws, bs).fold(0, |acc, (w, b)| acc ^ grundy[w][b]);
+    grundy
+}
+
+fn main() {
+    input! {
+        n: usize,
+        w: [usize; n],
+        b: [usize; n],
+    }
+    let grundy = build_grundy();
+    let xor = std::iter::zip(w, b).fold(0, |acc, (w, b)| acc ^ grundy[w][b]);
     let yes = xor != 0;
     println!("{}", if yes { "First" } else { "Second" });
 }
