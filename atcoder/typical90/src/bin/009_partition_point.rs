@@ -21,24 +21,11 @@ fn calc_score(degs: &[f64]) -> f64 {
     let mut score = 0f64;
     for &deg in degs {
         let i = degs.partition_point(|&x| x - deg <= 180.0);
-        if i > 0 {
-            let deg0 = degs[i - 1] - deg;
-            score = score.max(deg0.min(360.0 - deg0));
-        }
-        if i < n {
-            let deg0 = degs[i] - deg;
-            score = score.max(deg0.min(360.0 - deg0));
-        }
+        let deg0 = degs[(i + n - 1) % n] - deg;
+        score = score.max(deg0.min(360.0 - deg0));
 
-        let i = degs.partition_point(|&x| deg - x <= 180.0);
-        if i > 0 {
-            let deg0 = deg - degs[i - 1];
-            score = score.max(deg0.min(360.0 - deg0));
-        }
-        if i < n {
-            let deg0 = deg - degs[i];
-            score = score.max(deg0.min(360.0 - deg0));
-        }
+        let deg0 = degs[i % n] - deg;
+        score = score.max(deg0.min(360.0 - deg0));
     }
 
     score
