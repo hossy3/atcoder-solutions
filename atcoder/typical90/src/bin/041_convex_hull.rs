@@ -1,6 +1,7 @@
 use num_integer::Integer;
 use proconio::input;
 
+// 3角形の面積の2倍
 fn area2((x0, y0): &(i64, i64), (x1, y1): &(i64, i64), (x2, y2): &(i64, i64)) -> i64 {
     let (dx0, dx1) = (x1 - x0, x2 - x1);
     let (dy0, dy1) = (y1 - y0, y2 - y1);
