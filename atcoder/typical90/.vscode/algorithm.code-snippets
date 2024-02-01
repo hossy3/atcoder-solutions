@@ -49,5 +49,32 @@
       "}",
       ""
     ]
+  },
+  "lazysegtree_maxadd": {
+    "scope": "rust",
+    "prefix": "ac_lazysegtree_maxadd",
+    "description": "lazy segment tree",
+    "body": [
+      "use ac_library::{LazySegtree, MapMonoid, Max, Monoid};",
+      "",
+      "struct MaxAdd;",
+      "impl MapMonoid for MaxAdd {",
+      "    type M = Max<usize>;",
+      "    type F = usize;",
+      "",
+      "    fn identity_map() -> Self::F {",
+      "        0",
+      "    }",
+      "    fn mapping(&f: &Self::F, &x: &<Self::M as Monoid>::S) -> <Self::M as Monoid>::S {",
+      "        f + x",
+      "    }",
+      "    fn composition(&f: &Self::F, &g: &Self::F) -> Self::F {",
+      "        f + g",
+      "    }",
+      "}",
+      "",
+      "// let mut segtree: LazySegtree<MaxMax> = vec![0usize; w].into();",
+      ""
+    ]
   }
 }

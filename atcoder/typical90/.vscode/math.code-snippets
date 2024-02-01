@@ -1,0 +1,52 @@
+{
+  "build_primes": {
+    "scope": "rust",
+    "prefix": "ac_build_primes",
+    "body": [
+      "fn build_primes(n: usize) -> Vec<usize> {",
+      "    let mut primes = vec![true; n + 1];",
+      "    primes[0] = false;",
+      "    primes[1] = false;",
+      "    for i in 2..=n {",
+      "        if !primes[i] {",
+      "            continue;",
+      "        }",
+      "        let m = n / i;",
+      "        for j in 2..=m {",
+      "            primes[i * j] = false;",
+      "        }",
+      "    }",
+      "",
+      "    let m = primes.iter().filter(|&&b| b).count();",
+      "    let mut result = Vec::with_capacity(m);",
+      "    for (i, &b) in primes.iter().enumerate() {",
+      "        if b {",
+      "            result.push(i);",
+      "        }",
+      "    }",
+      "    result",
+      "}",
+      ""
+    ]
+  },
+  "build_prime_factor_nums": {
+    "scope": "rust",
+    "prefix": "ac_build_prime_factor_nums",
+    "body": [
+      "fn build_prime_factor_nums(n: usize) -> Vec<usize> {",
+      "    let mut primes = vec![0; n + 1];",
+      "    for i in 2..=n {",
+      "        if primes[i] > 0 {",
+      "            continue;",
+      "        }",
+      "        let m = n / i;",
+      "        for j in 1..=m {",
+      "            primes[i * j] += 1;",
+      "        }",
+      "    }",
+      "    primes",
+      "}",
+      ""
+    ]
+  }
+}
