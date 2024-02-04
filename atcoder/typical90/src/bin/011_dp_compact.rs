@@ -8,19 +8,16 @@ fn main() {
     dcs.sort();
 
     const D: usize = 5000;
-    let mut dp = vec![vec![0usize; D + 1]; n + 1];
-    dp[0][0] = 0;
+    let mut v = vec![0usize; D + 1];
+    v[0] = 0;
 
-    for (i, &(d, c, s)) in dcs.iter().enumerate() {
-        for j in 0..=D {
-            dp[i + 1][j] = dp[i + 1][j].max(dp[i][j]);
-            let j0 = j + c;
-            if j0 <= d {
-                dp[i + 1][j0] = dp[i + 1][j0].max(dp[i][j] + s);
-            }
+    for &(d, c, s) in &dcs {
+        let prev = v.clone();
+        for i in c..=d {
+            v[i] = v[i].max(prev[i - c] + s);
         }
     }
 
-    let result = dp[n].iter().max().unwrap();
+    let result = v.iter().max().unwrap();
     println!("{result}");
 }
