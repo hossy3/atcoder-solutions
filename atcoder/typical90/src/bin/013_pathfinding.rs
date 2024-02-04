@@ -20,15 +20,9 @@ fn main() {
     let reachable0 = dijkstra_all(&0, |&i| graph[i].iter().copied());
     let reachable1 = dijkstra_all(&(n - 1), |&i| graph[i].iter().copied());
 
-    let mut v = vec![(0usize, 0usize); n];
-    for (i, (_, c)) in reachable0 {
-        v[i].0 = c;
-    }
-    for (i, (_, c)) in reachable1 {
-        v[i].1 = c;
-    }
-
-    for (c0, c1) in v {
+    for i in 0..n {
+        let c0 = reachable0.get(&i).and_then(|&(_, c)| Some(c)).unwrap_or(0);
+        let c1 = reachable1.get(&i).and_then(|&(_, c)| Some(c)).unwrap_or(0);
         let result = c0 + c1;
         println!("{result}");
     }
