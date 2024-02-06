@@ -1,7 +1,6 @@
-use ac_library::ModInt1000000007;
 use proconio::input;
 
-type Mint = ModInt1000000007;
+type Mint = ac_library::ModInt1000000007;
 
 fn main() {
     input! {
