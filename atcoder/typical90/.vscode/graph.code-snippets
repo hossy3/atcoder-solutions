@@ -15,12 +15,12 @@
     ],
     "description": "Build undirected graph."
   },
-  "shortest_all_ungraph": {
+  "dijkstra_all": {
     "scope": "rust",
-    "prefix": "ac_shortest_all_ungraph",
+    "prefix": "ac_dijkstra_all",
     "description": "All shortest path length of undirected graph.",
     "body": [
-      "fn shortest_all_ungraph(s: usize, graph: &[Vec<usize>]) -> Vec<Option<usize>> {",
+      "fn dijkstra_all(s: usize, graph: &[Vec<usize>]) -> Vec<Option<usize>> {",
       "    let n = graph.len();",
       "    let mut v = vec![None; n];",
       "    let mut queue = VecDeque::new();",
@@ -55,12 +55,12 @@
       ""
     ]
   },
-  "shortest_all_ungraph_with_cost": {
+  "dijkstra_all_with_cost": {
     "scope": "rust",
-    "prefix": "ac_shortest_all_ungraph_with_cost",
+    "prefix": "ac_dijkstra_all_with_cost",
     "description": "All shortest path costs of undirected graph.",
     "body": [
-      "fn shortest_all_ungraph_with_cost(s: usize, graph: &[Vec<(usize, usize)>]) -> Vec<Option<usize>> {",
+      "fn dijkstra_all_with_cost(s: usize, graph: &[Vec<(usize, usize)>]) -> Vec<Option<usize>> {",
       "    let n = graph.len();",
       "    let mut v = vec![None; n];",
       "    let mut heap = BinaryHeap::<(Reverse<usize>, usize)>::new();",

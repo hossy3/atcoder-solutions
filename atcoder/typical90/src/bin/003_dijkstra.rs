@@ -3,7 +3,7 @@ use std::collections::VecDeque;
 use itertools::Itertools;
 use proconio::{input, marker::Usize1};
 
-fn shortest_all_ungraph(s: usize, graph: &[Vec<usize>]) -> Vec<Option<usize>> {
+fn dijkstra_all(s: usize, graph: &[Vec<usize>]) -> Vec<Option<usize>> {
     let n = graph.len();
     let mut v = vec![None; n];
     let mut queue = VecDeque::new();
@@ -38,10 +38,10 @@ fn main() {
 
     let graph = build_ungraph(n, &ab);
 
-    let scores = shortest_all_ungraph(0, &graph);
+    let scores = dijkstra_all(0, &graph);
     let index = scores.iter().position_max().unwrap();
 
-    let scores = shortest_all_ungraph(index, &graph);
+    let scores = dijkstra_all(index, &graph);
     let score = scores.iter().max().unwrap().unwrap() + 1; // add a road
     println!("{score}");
 }

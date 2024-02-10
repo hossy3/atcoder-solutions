@@ -2,7 +2,7 @@ use std::{cmp::Reverse, collections::BinaryHeap};
 
 use proconio::{input, marker::Usize1};
 
-fn shortest_all_ungraph_with_cost(s: usize, graph: &[Vec<(usize, usize)>]) -> Vec<Option<usize>> {
+fn dijkstra_all_with_cost(s: usize, graph: &[Vec<(usize, usize)>]) -> Vec<Option<usize>> {
     let n = graph.len();
     let mut v = vec![None; n];
     let mut heap = BinaryHeap::<(Reverse<usize>, usize)>::new();
@@ -45,8 +45,8 @@ fn main() {
     }
 
     let graph = build_ungraph_with_cost(n, &abc);
-    let s0 = shortest_all_ungraph_with_cost(0, &graph);
-    let sn = shortest_all_ungraph_with_cost(n - 1, &graph);
+    let s0 = dijkstra_all_with_cost(0, &graph);
+    let sn = dijkstra_all_with_cost(n - 1, &graph);
 
     for i in 0..n {
         let result = s0[i].unwrap() + sn[i].unwrap();
