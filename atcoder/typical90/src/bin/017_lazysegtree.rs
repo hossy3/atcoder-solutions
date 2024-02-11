@@ -1,7 +1,6 @@
-use std::cmp::Reverse;
-
 use ac_library::{LazySegtree, MapMonoid, Max, Monoid};
 use proconio::input;
+use std::cmp::Reverse;
 
 struct MaxAdd;
 impl MapMonoid for MaxAdd {

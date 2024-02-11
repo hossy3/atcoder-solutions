@@ -1,9 +1,8 @@
+use proconio::{input, marker::Chars};
 use std::{
     collections::{BinaryHeap, HashMap},
     mem,
 };
-
-use proconio::{input, marker::Chars};
 
 fn build_rows(w: usize) -> Vec<usize> {
     let mut v = vec![0];

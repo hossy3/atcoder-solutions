@@ -1,7 +1,6 @@
-use std::cmp::Reverse;
-
 use ac_library::FenwickTree;
 use proconio::input;
+use std::cmp::Reverse;
 
 fn f(n: usize, lr: &[(usize, usize)]) -> i64 {
     let mut lr: Vec<(usize, usize)> = lr.iter().map(|&(l, r)| (l - 1, r - 1)).collect();

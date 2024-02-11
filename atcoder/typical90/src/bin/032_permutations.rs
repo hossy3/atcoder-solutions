@@ -1,7 +1,6 @@
-use std::collections::HashSet;
-
 use itertools::Itertools;
 use proconio::{input, marker::Usize1};
+use std::collections::HashSet;
 
 fn main() {
     input! {

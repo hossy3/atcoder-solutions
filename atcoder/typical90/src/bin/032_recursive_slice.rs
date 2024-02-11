@@ -1,6 +1,5 @@
-use std::collections::HashSet;
-
 use proconio::{input, marker::Usize1};
+use std::collections::HashSet;
 
 fn f(
     a: &[Vec<usize>],

@@ -1,6 +1,5 @@
-use std::{cmp::Reverse, collections::BinaryHeap};
-
 use proconio::{input, marker::Usize1};
+use std::{cmp::Reverse, collections::BinaryHeap};
 
 fn dijkstra_all_with_cost(s: usize, graph: &[Vec<(usize, usize)>]) -> Vec<Option<usize>> {
     let n = graph.len();

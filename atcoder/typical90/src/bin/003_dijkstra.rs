@@ -1,7 +1,6 @@
-use std::collections::VecDeque;
-
 use itertools::Itertools;
 use proconio::{input, marker::Usize1};
+use std::collections::VecDeque;
 
 fn dijkstra_all(s: usize, graph: &[Vec<usize>]) -> Vec<Option<usize>> {
     let n = graph.len();

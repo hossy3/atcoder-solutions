@@ -1,6 +1,5 @@
-use std::f64::consts::PI;
-
 use proconio::input;
+use std::f64::consts::PI;
 
 fn pitch(x: f64, y: f64, uy: f64, uz: f64) -> f64 {
     let x0 = (x.powi(2) + (uy - y).powi(2)).sqrt();

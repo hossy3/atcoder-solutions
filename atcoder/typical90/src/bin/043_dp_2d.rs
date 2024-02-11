@@ -1,9 +1,8 @@
-use std::{cmp::Reverse, collections::BinaryHeap};
-
 use proconio::{
     input,
     marker::{Chars, Usize1},
 };
+use std::{cmp::Reverse, collections::BinaryHeap};
 
 fn main() {
     input! {

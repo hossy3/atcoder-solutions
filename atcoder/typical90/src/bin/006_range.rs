@@ -1,7 +1,6 @@
-use std::collections::BTreeSet;
-
 use itertools::Itertools;
 use proconio::{input, marker::Chars};
+use std::collections::BTreeSet;
 
 fn to_index(c: char) -> usize {
     c as usize - 'a' as usize

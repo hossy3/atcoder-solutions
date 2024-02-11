@@ -1,6 +1,5 @@
-use std::collections::HashSet;
-
 use proconio::input;
+use std::collections::HashSet;
 
 fn main() {
     input! {

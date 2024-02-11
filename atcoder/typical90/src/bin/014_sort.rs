@@ -1,6 +1,5 @@
-use std::iter;
-
 use proconio::input;
+use std::iter;
 
 fn main() {
     input! {

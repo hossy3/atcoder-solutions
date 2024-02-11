@@ -1,5 +1,4 @@
 use pathfinding::prelude::dijkstra_all;
-
 use proconio::{input, marker::Usize1};
 
 fn build_ungraph(n: usize, uv: &[(usize, usize)]) -> Vec<Vec<usize>> {
