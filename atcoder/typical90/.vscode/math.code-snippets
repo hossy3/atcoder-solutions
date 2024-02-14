@@ -48,5 +48,28 @@
       "}",
       ""
     ]
+  },
+  "ac_build_fact": {
+    "scope": "rust",
+    "prefix": "ac_build_fact",
+    "body": [
+      "fn build_fact(n: usize) -> Vec<Mint> {",
+      "    let mut fact = vec![Mint::new(1); n + 1];",
+      "    for i in 2..=n {",
+      "        fact[i] = fact[i - 1] * i;",
+      "    }",
+      "    fact",
+      "}",
+      "",
+      "fn build_fact_inv(fact: &[Mint]) -> Vec<Mint> {",
+      "    let n = fact.len() - 1;",
+      "    let mut fact_inv = vec![Mint::new(1); n + 1];",
+      "    for i in 0..=n {",
+      "        fact_inv[i] = fact[i].inv();",
+      "    }",
+      "    fact_inv",
+      "}",
+      ""
+    ]
   }
 }
