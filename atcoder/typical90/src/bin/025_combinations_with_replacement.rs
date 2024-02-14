@@ -19,10 +19,10 @@ fn f1(v: &[&usize]) -> [usize; 10] {
 }
 
 fn f(n: usize, b: usize) -> usize {
-    let n_digits = n.ilog10() as usize + 1;
+    let ndigits = n.ilog10() as usize + 1;
     let nums: Vec<_> = (0usize..=9).collect();
     let mut result = 0usize;
-    for i in 1..=n_digits {
+    for i in 1..=ndigits {
         for v in nums.iter().combinations_with_replacement(i) {
             let mul = v.iter().fold(1, |acc, &&x| acc * x);
             let x = mul + b;
