@@ -8,7 +8,7 @@ fn main() {
         ab: [(Usize1, Usize1); n - 1],
     }
     let mut v = vec![vec![0; 0]; n];
-    for &(a, b) in ab.iter() {
+    for &(a, b) in &ab {
         v[a].push(b);
         v[b].push(a);
     }
@@ -20,7 +20,7 @@ fn main() {
             continue;
         }
         s.insert(a);
-        for x in v[a].iter() {
+        for x in &v[a] {
             stack.push((*x, 1 - c));
         }
     }

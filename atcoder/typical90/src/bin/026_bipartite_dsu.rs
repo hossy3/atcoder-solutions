@@ -9,7 +9,7 @@ fn main() {
     }
 
     let mut uf = Dsu::new(n * 2);
-    for &(a, b) in ab.iter() {
+    for &(a, b) in &ab {
         uf.merge(a, n + b);
         uf.merge(n + a, b);
     }
