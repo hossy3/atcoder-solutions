@@ -1,8 +1,8 @@
 use proconio::input;
 use rustc_hash::FxHashMap;
 
-fn area(i: usize, j: usize, m: usize, imos: &[Vec<i64>]) -> i64 {
-    imos[i + m][j + m] + imos[i][j] - imos[i + m][j] - imos[i][j + m]
+fn area(i: usize, j: usize, m: usize, cum: &[Vec<i64>]) -> i64 {
+    cum[i + m][j + m] + cum[i][j] - cum[i + m][j] - cum[i][j + m]
 }
 
 fn main() {
@@ -10,20 +10,10 @@ fn main() {
         (n, m): (usize, usize),
         a: [[i64; n]; n],
     }
-    let mut imos = vec![vec![0i64; n + 1]; n + 1];
+    let mut cum = vec![vec![0i64; n + 1]; n + 1];
     for i in 0..n {
         for j in 0..n {
-            imos[i + 1][j + 1] = a[i][j];
-        }
-    }
-    for i in 0..=n {
-        for j in 0..n {
-            imos[i][j + 1] += imos[i][j];
-        }
-    }
-    for i in 0..n {
-        for j in 0..=n {
-            imos[i + 1][j] += imos[i][j];
+            cum[i + 1][j + 1] = cum[i + 1][j] + cum[i][j + 1] - cum[i][j] + a[i][j];
         }
     }
 
@@ -32,7 +22,7 @@ fn main() {
     for i in 0..=(n - m) {
         let mut val = 0;
         for j in 0..(n - m) {
-            val = val.max(area(i, j, m, &imos));
+            val = val.max(area(i, j, m, &cum));
         }
         map.insert((i, 0, i + m, n), val);
     }
@@ -47,7 +37,7 @@ fn main() {
     for j in 0..=(n - m) {
         let mut val = 0;
         for i in 0..=(n - m) {
-            val = val.max(area(i, j, m, &imos));
+            val = val.max(area(i, j, m, &cum));
         }
         map.insert((0, j, n, j + m), val);
     }
@@ -61,22 +51,22 @@ fn main() {
 
     for i in 0..(n - m) {
         for j in 0..(n - m) {
-            let val = area(i, j, m, &imos)
+            let val = area(i, j, m, &cum)
                 .max(*map.get(&(0, 0, i + m - 1, j + m)).unwrap_or(&0))
                 .max(*map.get(&(0, 0, i + m, j + m - 1)).unwrap_or(&0));
             map.insert((0, 0, i + m, j + m), val);
 
-            let val = area(n - m - i, j, m, &imos)
+            let val = area(n - m - i, j, m, &cum)
                 .max(*map.get(&(n - m - i, 0, n - 1, j + m)).unwrap_or(&0))
                 .max(*map.get(&(n - m - i, 0, n, j + m - 1)).unwrap_or(&0));
             map.insert((n - m - i, 0, n, j + m), val);
 
-            let val = area(i, n - m - j, m, &imos)
+            let val = area(i, n - m - j, m, &cum)
                 .max(*map.get(&(0, n - m - j, i + m - 1, n)).unwrap_or(&0))
                 .max(*map.get(&(0, n - m - j, i + m, n - 1)).unwrap_or(&0));
             map.insert((0, n - m - j, i + m, n), val);
 
-            let val = area(n - m - i, n - m - j, m, &imos)
+            let val = area(n - m - i, n - m - j, m, &cum)
                 .max(*map.get(&(n - m - i, n - m - j, n - 1, n)).unwrap_or(&0))
                 .max(*map.get(&(n - m - i, n - m - j, n, n - 1)).unwrap_or(&0));
             map.insert((n - m - i, n - m - j, n, n), val);
