@@ -1,6 +1,5 @@
 use std::collections::VecDeque;
 
-use itertools::Itertools;
 use proconio::input;
 
 fn main() {
@@ -17,16 +16,15 @@ fn main() {
         let prev = dp.clone();
         let mut queue = VecDeque::<usize>::new();
         for i in l..=w {
-            while !queue.is_empty() && prev[*queue.back().unwrap()] <= prev[i - l] {
+            while let Some(&j) = queue.back() {
+                if prev[j] > prev[i - l] {
+                    break;
+                }
                 queue.pop_back();
             }
             queue.push_back(i - l);
             if i > r && queue[0] == i - r - 1 {
                 queue.pop_front();
-            }
-            for (i0, i1) in queue.iter().tuple_windows() {
-                assert!(i0 < i1);
-                assert!(prev[*i0] > prev[*i1]);
             }
             let x = prev[queue[0]];
             dp[i] = prev[i].max(x + v);
