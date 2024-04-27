@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use num_integer::Integer;
 use proconio::input;
 
@@ -9,33 +8,32 @@ fn area2((x0, y0): &(i64, i64), (x1, y1): &(i64, i64), (x2, y2): &(i64, i64)) ->
     dx0 * dy1 - dx1 * dy0
 }
 
-// 凸包を x 最小値から反時計回りに返す
-fn convex_hull(mut xy: Vec<(i64, i64)>) -> Vec<(i64, i64)> {
-    assert!(xy.len() >= 3);
-    xy.sort();
-
-    let mut lower = vec![xy[0], xy[1]];
-    for &xy in &xy[2..] {
-        while lower.len() >= 2 && area2(&lower[lower.len() - 2], &lower[lower.len() - 1], &xy) <= 0
-        {
-            lower.pop();
+fn convex_hull_upper(xy: &[(i64, i64)]) -> Vec<(i64, i64)> {
+    let mut v = vec![xy[0]];
+    for &xy in &xy[1..] {
+        if v[v.len() - 1].0 == xy.0 {
+            v.pop();
         }
-        lower.push(xy);
-    }
-
-    let mut upper = vec![xy[0], xy[1]];
-    for &xy in &xy[2..] {
-        while upper.len() >= 2 && area2(&upper[upper.len() - 2], &upper[upper.len() - 1], &xy) >= 0
-        {
-            upper.pop();
+        while v.len() >= 2 && area2(&v[v.len() - 2], &v[v.len() - 1], &xy) >= 0 {
+            v.pop();
         }
-        upper.push(xy);
+        v.push(xy);
     }
+    v
+}
 
-    for &x in upper[1..(upper.len() - 1)].iter().rev() {
-        lower.push(x);
+fn convex_hull_lower(xy: &[(i64, i64)]) -> Vec<(i64, i64)> {
+    let mut v = vec![xy[0]];
+    for &xy in &xy[1..] {
+        if v[v.len() - 1].0 == xy.0 {
+            continue;
+        }
+        while v.len() >= 2 && area2(&v[v.len() - 2], &v[v.len() - 1], &xy) <= 0 {
+            v.pop();
+        }
+        v.push(xy);
     }
-    lower
+    v
 }
 
 // ac_library::floor_sum() の $0 \leq a, b \leq m$ 制約を除いたもの
@@ -49,36 +47,23 @@ fn floor_sum(n: i64, m: i64, a: i64, b: i64) -> i64 {
 fn main() {
     input! {
         n: usize,
-        xy: [(i64, i64); n],
+        mut xy: [(i64, i64); n],
     }
 
-    let v = convex_hull(xy);
-
-    let lower_min = 0;
-    let upper_min = v.iter().position_max().unwrap();
-    let lower_max = if v[upper_min].0 == v[upper_min - 1].0 {
-        upper_min - 1
-    } else {
-        upper_min
-    };
-    let upper_max = if v[0].0 == v[v.len() - 1].0 {
-        v.len() - 1
-    } else {
-        v.len()
-    };
+    xy.sort();
+    let upper = convex_hull_upper(&xy);
+    let lower = convex_hull_lower(&xy);
 
     let mut ngrid = 0i64;
-    for i in (upper_min..upper_max).rev() {
-        let (x0, y0) = &v[(i + 1) % v.len()];
-        let (x1, y1) = &v[i];
+    for v in upper.windows(2) {
+        let ((x0, y0), (x1, y1)) = (v[0], v[1]);
         ngrid += (x1 - x0) * y0 + floor_sum(x1 - x0, x1 - x0, y1 - y0, 0);
     }
-    for i in lower_min..lower_max {
-        let (x0, y0) = &v[i];
-        let (x1, y1) = &v[(i + 1) % v.len()];
+    for v in lower.windows(2) {
+        let ((x0, y0), (x1, y1)) = (v[0], v[1]);
         ngrid -= (x1 - x0) * y0 + floor_sum(x1 - x0, x1 - x0, y1 - y0, -1);
     }
-    ngrid += v[upper_min].1 - v[lower_max].1 + 1;
+    ngrid += upper.last().unwrap().1 - lower.last().unwrap().1 + 1;
 
     let result = ngrid - n as i64;
     println!("{result}");
