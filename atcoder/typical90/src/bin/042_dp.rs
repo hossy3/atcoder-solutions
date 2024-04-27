@@ -2,19 +2,19 @@ use proconio::input;
 
 type Mint = ac_library::ModInt1000000007;
 
-fn f(k: usize) -> u32 {
+fn f(k: usize) -> Mint {
     if k % 9 != 0 {
-        return 0;
+        return Mint::new(0);
     }
     let mut dp = vec![Mint::new(0); k + 1];
     dp[0] = Mint::new(1);
     for i in 0..k {
+        let x = dp[i];
         for j in (i + 1)..=(i + 9).min(k) {
-            let x = dp[i];
             dp[j] += x;
         }
     }
-    dp[k].val()
+    dp[k]
 }
 
 fn main() {
