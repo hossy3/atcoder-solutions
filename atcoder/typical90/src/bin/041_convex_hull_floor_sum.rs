@@ -57,11 +57,13 @@ fn main() {
     let mut ngrid = 0i64;
     for v in upper.windows(2) {
         let ((x0, y0), (x1, y1)) = (v[0], v[1]);
-        ngrid += (x1 - x0) * y0 + floor_sum(x1 - x0, x1 - x0, y1 - y0, 0);
+        let m = x1 - x0;
+        ngrid += floor_sum(m, m, y1 - y0, m * y0);
     }
     for v in lower.windows(2) {
         let ((x0, y0), (x1, y1)) = (v[0], v[1]);
-        ngrid -= (x1 - x0) * y0 + floor_sum(x1 - x0, x1 - x0, y1 - y0, -1);
+        let m = x1 - x0;
+        ngrid -= floor_sum(m, m, y1 - y0, m * y0 - 1);
     }
     ngrid += upper.last().unwrap().1 - lower.last().unwrap().1 + 1;
 
