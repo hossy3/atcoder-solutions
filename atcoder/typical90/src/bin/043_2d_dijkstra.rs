@@ -6,16 +6,13 @@ use std::{cmp::Reverse, collections::BinaryHeap};
 
 fn main() {
     input! {
-        h: usize,
-        w: usize,
-        rs: Usize1,
-        cs: Usize1,
-        rt: Usize1,
-        ct: Usize1,
+        (h, w): (usize, usize),
+        (rs, cs): (Usize1, Usize1),
+        (rt, ct): (Usize1, Usize1),
         s: [Chars; h],
     }
 
-    let mut a = vec![vec![[usize::MAX, usize::MAX, usize::MAX, usize::MAX]; w + 2]; h + 2]; // UDLR
+    let mut a = vec![vec![[usize::MAX, usize::MAX, usize::MAX, usize::MAX]; w]; h]; // UDLR
     a[rs][cs] = [0, 0, 0, 0];
     let drc = [(-1, 0), (1, 0), (0, -1), (0, 1)];
 
