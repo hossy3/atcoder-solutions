@@ -2,7 +2,7 @@ use proconio::{
     input,
     marker::{Chars, Usize1},
 };
-use std::collections::VecDeque;
+use std::{cmp::Reverse, collections::BinaryHeap};
 
 fn main() {
     input! {
@@ -16,19 +16,19 @@ fn main() {
     a[rs][cs] = [0, 0, 0, 0];
     let dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)];
 
-    let mut queue = VecDeque::<((usize, usize, usize), usize)>::new(); // ((r, c, dir), cost)
+    let mut queue = BinaryHeap::<(Reverse<usize>, (usize, usize, usize))>::new(); // (cost, (r, c, dir))
     for dir in 0..4 {
-        queue.push_back(((rs, cs, dir), 0));
+        queue.push((Reverse(0), (rs, cs, dir)));
     }
 
-    while let Some(((r, c, dir), cost)) = queue.pop_front() {
+    while let Some((Reverse(cost), (r, c, dir))) = queue.pop() {
         let (dr, dc) = dirs[dir];
         let r0 = r.wrapping_add_signed(dr);
         let c0 = c.wrapping_add_signed(dc);
         if r0 < h && c0 < w && s[r0][c0] != '#' {
             if a[r0][c0][dir] > cost {
                 a[r0][c0][dir] = cost;
-                queue.push_front(((r0, c0, dir), cost));
+                queue.push((Reverse(cost), (r0, c0, dir)));
             }
         }
 
@@ -36,7 +36,7 @@ fn main() {
         for (dir0, _) in dirs.iter().enumerate() {
             if a[r][c][dir0] > cost0 {
                 a[r][c][dir0] = cost0;
-                queue.push_back(((r, c, dir0), cost0))
+                queue.push((Reverse(cost0), (r, c, dir0)))
             }
         }
     }
