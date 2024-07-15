@@ -9,13 +9,15 @@ fn main() {
     }
     let mut q = BinaryHeap::new();
     for (a, b) in ab {
-        q.push(b);
-        q.push(a - b);
+        q.push((b, a - b));
     }
     let mut score = 0;
     for _ in 0..k {
-        let x = q.pop().unwrap();
+        let (x, y) = q.pop().unwrap();
         score += x;
+        if y > 0 {
+            q.push((y, 0));
+        }
     }
     println!("{score}");
 }
