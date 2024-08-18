@@ -24,10 +24,15 @@ fn f(mut a: Vec<Vec<bool>>, mut b: Vec<bool>) -> usize {
                 a[j] = xor(&a[j], &a[pos]);
             }
         }
-        if b[i] {
-            b = xor(&b, &a[pos]);
-        }
         pos += 1;
+    }
+
+    for a in &a[0..pos] {
+        if let Some(i) = a.iter().position(|&x| x) {
+            if b[i] {
+                b = xor(a, &b);
+            }
+        }
     }
 
     let yes = b.iter().all(|&x| !x);
