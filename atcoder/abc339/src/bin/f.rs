@@ -16,7 +16,7 @@ fn main() {
     for str in a {
         let x: Result<BigUint, _> = FromStr::from_str(&str);
         if let Ok(x) = x {
-            v.push(x % m.clone());
+            v.push(x % &m);
         }
     }
     let mut map = HashMap::new();
@@ -27,7 +27,7 @@ fn main() {
     let mut result = 0;
     for i in &v {
         for j in &v {
-            let x = (i * j) % m.clone();
+            let x = (i * j) % &m;
             if let Some(y) = map.get(&x) {
                 result += y;
             }
