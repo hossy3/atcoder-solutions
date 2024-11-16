@@ -1,10 +1,20 @@
 use proconio::{input, marker::Usize1};
+use superslice::Ext;
 
 fn f(n: usize, xy: &[(usize, usize)], (a, b): (usize, usize)) -> bool {
+    let i0 = xy.lower_bound_by_key(&a, |&(x, _)| x);
+    if i0 == xy.len() || xy[i0].0 != a {
+        return false;
+    }
+    let i1 = xy.lower_bound_by_key(&b, |&(x, _)| x);
+
     let mut v = vec![false; n];
     v[a] = true;
-    for &(x, y) in xy {
-        v[y] |= v[x];
+
+    for &(x, y) in &xy[i0..i1] {
+        if v[x] {
+            v[y] = true;
+        }
     }
     v[b]
 }
