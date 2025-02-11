@@ -25,10 +25,8 @@ fn main() {
         lrv: [(Usize1, Usize1, i64); q]
     }
 
-    let mut segtree = Segtree::<AbsAdd<_>>::new(n - 1);
-    for i in 0..(n - 1) {
-        segtree.set(i, a[i + 1] - a[i]);
-    }
+    let diffs: Vec<_> = (0..(n - 1)).map(|i| a[i + 1] - a[i]).collect();
+    let mut segtree = Segtree::<AbsAdd<_>>::from(diffs);
 
     for (l, r, v) in lrv {
         if l > 0 {

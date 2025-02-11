@@ -8,11 +8,7 @@ fn main() {
         lrv: [(Usize1, Usize1, i64); q]
     }
 
-    let mut diffs = vec![0i64; n - 1];
-    for i in 0..(n - 1) {
-        diffs[i] = a[i + 1] - a[i];
-    }
-
+    let mut diffs: Vec<_> = (0..(n - 1)).map(|i| a[i + 1] - a[i]).collect();
     let mut score: i64 = diffs.iter().map(|x| x.abs()).sum();
 
     for (l, r, v) in lrv {
