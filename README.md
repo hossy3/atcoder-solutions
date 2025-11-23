@@ -13,6 +13,7 @@ $ cargo generate --git https://github.com/rust-lang-ja/atcoder-rust-base --branc
 
 ## Note
 
+AHC 以外について:
 * .rs だけリポジトリに登録しています
 * 登録しているファイルはすべて Accepted を確認しています
 * 単体テストは通過していない場合があります (小数点の精度など)
