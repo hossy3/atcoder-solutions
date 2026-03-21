@@ -1,14 +1,33 @@
 use proconio::{input, marker::Usize1};
 
-// 巡回セールスマン (TSP), bit DP
+/// 巡回セールスマン問題 (Traveling Salesman Problem) を bit DP で解く
+///
+/// state: state[bits][i] bits 到達済みの、現在位置 i でのコスト最小値。事前に usize::MAX で埋めておくこと
+/// dist: i から j に移動するときのコスト
+fn solve_traveling_salesman<F>(state: &mut Vec<Vec<usize>>, dist: F)
+where
+    F: Fn(usize, usize) -> usize,
+{
+    let m = state[0].len();
+    assert_eq!(1 << m, state.len());
 
-trait BitTest {
-    fn bit_test(&self, i: usize) -> bool;
-}
+    let bit_test = |bits: usize, i: usize| bits & (1 << i) != 0;
 
-impl BitTest for usize {
-    fn bit_test(&self, i: usize) -> bool {
-        self & (1 << i) != 0
+    for visited in 0..(1 << m) {
+        for i in 0..m {
+            if state[visited][i] == usize::MAX {
+                continue;
+            }
+
+            for j in 0..m {
+                if bit_test(visited, j) {
+                    continue;
+                }
+                let x = state[visited][i] + dist(i, j);
+                let visited = visited | (1 << j);
+                state[visited][j] = state[visited][j].min(x);
+            }
+        }
     }
 }
 
@@ -38,25 +57,7 @@ fn main() {
         let visited = 1 << i;
         state[visited][i] = dist(s, p[i]);
     }
-
-    for visited in 1..(1 << m) {
-        // 現在地
-        for i in 0..m {
-            if !visited.bit_test(i) {
-                continue;
-            }
-
-            // 次の移動先
-            for j in 0..m {
-                if visited.bit_test(j) {
-                    continue;
-                }
-                let x = state[visited][i] + dist(p[i], p[j]);
-                let visited = visited | (1 << j);
-                state[visited][j] = state[visited][j].min(x);
-            }
-        }
-    }
+    solve_traveling_salesman(&mut state, |i, j| dist(p[i], p[j]));
 
     let all_visited = (1 << m) - 1;
     let result = (0..m)
