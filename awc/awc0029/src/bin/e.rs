@@ -25,7 +25,8 @@ fn build_digraph(n: usize, uvw: &[(usize, usize, usize)]) -> Vec<Vec<(usize, usi
     graph
 }
 
-fn shortest_ungraph(graph: &[Vec<(usize, usize)>], s: usize, e: usize) -> Option<usize> {
+/// 非負の重み付きグラフの s から e までの最短距離をダイクストラ法で解く
+fn shortest_graph(graph: &[Vec<(usize, usize)>], s: usize, e: usize) -> Option<usize> {
     let mut set = HashSet::new();
     let mut heap = BinaryHeap::new();
     heap.push((Reverse(0), s));
@@ -63,7 +64,7 @@ fn main() {
             if i == j {
                 continue;
             }
-            if let Some(x) = shortest_ungraph(&graph, t[i], t[j]) {
+            if let Some(x) = shortest_graph(&graph, t[i], t[j]) {
                 dist[i][j] = x;
             } else {
                 dist[i][j] = usize::MAX;

@@ -1,7 +1,4 @@
-use std::{
-    cmp::Reverse,
-    collections::{BinaryHeap, HashSet},
-};
+use std::collections::{HashSet, VecDeque};
 
 use proconio::{input, marker::Usize1};
 
@@ -16,20 +13,19 @@ fn build_ungraph(n: usize, uvw: &[(usize, usize, usize)], k: usize) -> Vec<Vec<u
     graph
 }
 
-fn shortest_ungraph(graph: &[Vec<usize>], s: usize, e: usize) -> Option<usize> {
+/// 重みなしグラフの s から e までの最短距離を 01-bfs で解く
+fn shortest_graph(graph: &[Vec<usize>], s: usize, e: usize) -> Option<usize> {
     let mut set = HashSet::new();
-    let mut heap = BinaryHeap::new();
-    set.insert(s);
-    heap.push((Reverse(0), s));
+    let mut queue = VecDeque::new();
+    queue.push_back((0, s));
 
-    while let Some((Reverse(step), i)) = heap.pop() {
+    while let Some((step, i)) = queue.pop_front() {
         if i == e {
             return Some(step);
         }
         for &j in &graph[i] {
-            if !set.contains(&j) {
-                set.insert(j);
-                heap.push((Reverse(step + 1), j));
+            if set.insert(j) {
+                queue.push_back((step + 1, j));
             }
         }
     }
@@ -45,7 +41,7 @@ fn main() {
     }
 
     let graph = build_ungraph(n, &uvw, k);
-    if let Some(result) = shortest_ungraph(&graph, 0, n - 1) {
+    if let Some(result) = shortest_graph(&graph, 0, n - 1) {
         println!("{result}");
     } else {
         println!("-1");
