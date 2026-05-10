@@ -1,8 +1,11 @@
 use ac_library::{LazySegtree, MapMonoid, Monoid};
 use proconio::{input, marker::Usize1};
 
-// 区間加算: 区間の大きさも保持する
-
+/// 遅延セグメント木 区間加算: 区間の大きさも保持する
+/// # Examples
+/// ```
+/// let mut segtree: LazySegtree<AddAdd> = (0..10).map(|&x| (1, x)).collect::<Vec<_>>().into();
+/// ```
 pub struct AddAddM;
 impl Monoid for AddAddM {
     type S = (usize, usize); // (区間, 値)
