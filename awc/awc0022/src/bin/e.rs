@@ -1,5 +1,7 @@
 use proconio::{input, marker::Usize1};
 
+/// ワーシャルフロイド法 (floyd_warshall) で、重み付きグラフの全ペアの最短経路を解く
+/// * `d`: 隣接行列 (d[u][v] が `u` から `v` への重み。 移動不可能は `usize::MAX` で示す)
 fn floyd_warshall(mut d: Vec<Vec<usize>>) -> Vec<Vec<usize>> {
     let n = d.len();
     for k in 0..n {
