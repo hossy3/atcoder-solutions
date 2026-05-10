@@ -1,7 +1,8 @@
 use ac_library::FenwickTree;
 use proconio::{input, marker::Usize1};
 
-// 転倒数
+/// 転倒数 (inversion) を求める
+/// * `a` - 0 開始の配列。 例: `[3, 1, 4, 2, 0]`
 fn inversion(a: &[usize]) -> usize {
     let n = a.len();
     let mut tree = FenwickTree::new(n, 0usize);
