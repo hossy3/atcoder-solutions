@@ -7,25 +7,21 @@ fn meet_in_the_middle(s: usize, a: &[usize]) -> usize {
     let n = a.len();
     assert!(n <= 40);
 
-    let mut m0 = HashMap::new();
-    m0.insert(0usize, 1usize);
-    for &x in &a[..(n / 2)] {
-        let mut m = m0.clone();
-        for (&k, &v) in &m0 {
-            *m.entry(k + x).or_insert(0) += v;
+    fn f(a: &[usize]) -> HashMap<usize, usize> {
+        let mut m = HashMap::new();
+        m.insert(0usize, 1usize);
+        for &x in a {
+            let mut m0 = m.clone();
+            for (&k, &v) in &m {
+                *m0.entry(k + x).or_insert(0) += v;
+            }
+            m = m0;
         }
-        m0 = m;
+        m
     }
 
-    let mut m1 = HashMap::new();
-    m1.insert(0usize, 1usize);
-    for &x in &a[(n / 2)..] {
-        let mut m = m1.clone();
-        for (&k, &v) in &m1 {
-            *m.entry(k + x).or_insert(0) += v;
-        }
-        m1 = m;
-    }
+    let m0 = f(&a[..(n / 2)]);
+    let m1 = f(&a[(n / 2)..]);
 
     let mut result = 0usize;
     for (&k0, &v0) in &m0 {
