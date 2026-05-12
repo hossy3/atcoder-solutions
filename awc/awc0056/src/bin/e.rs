@@ -1,8 +1,3 @@
-use std::{
-    cmp::Reverse,
-    collections::{BinaryHeap, HashSet},
-};
-
 use proconio::{input, marker::Usize1};
 
 /// 巡回セールスマン問題 (Traveling Salesman Problem) を bit DP で解く
@@ -46,23 +41,34 @@ fn build_ungraph_weight(n: usize, uvw: &[(usize, usize, usize)]) -> Vec<Vec<(usi
 }
 
 /// 非負の重み付きグラフの s から e までの最短距離をダイクストラ法で解く
-fn shortest_graph(graph: &[Vec<(usize, usize)>], s: usize, e: usize) -> Option<usize> {
-    let mut set = HashSet::new();
+fn shortest_graph_weight(graph: &[Vec<(usize, usize)>], s: usize, e: usize) -> Option<usize> {
+    use std::{cmp::Reverse, collections::BinaryHeap};
+
+    let n = graph.len();
+    let mut v = vec![None; n];
+
     let mut heap = BinaryHeap::new();
     heap.push((Reverse(0), s));
+    v[s] = Some(0);
 
     while let Some((Reverse(step), i)) = heap.pop() {
+        if step > v[i].unwrap_or(usize::MAX) {
+            continue;
+        }
         if i == e {
             return Some(step);
         }
-        if set.insert(i) {
-            for &(j, w) in &graph[i] {
-                if !set.contains(&j) {
-                    heap.push((Reverse(step + w), j));
-                }
+
+        for &(j, w) in &graph[i] {
+            let step = step + w;
+            let step0 = v[j].unwrap_or(usize::MAX);
+            if step < step0 {
+                v[j] = Some(step);
+                heap.push((Reverse(step), j));
             }
         }
     }
+
     None
 }
 
@@ -84,7 +90,7 @@ fn main() {
     let graph = build_ungraph_weight(n, &uvw);
     for i in 0..n0 {
         for j in i..n0 {
-            let x = shortest_graph(&graph, d0[i], d0[j]).unwrap();
+            let x = shortest_graph_weight(&graph, d0[i], d0[j]).unwrap();
             m[i][j] = x;
             m[j][i] = x;
         }
